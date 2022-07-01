@@ -1,0 +1,2 @@
+com.github.rev1an.core.junit.extension.TrimmingExceptionHandler
+com.github.rev1an.core.junit.extension.JacksonParameterResolver

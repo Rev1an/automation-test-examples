@@ -1,0 +1,7 @@
+group "${group}.core"
+description "Core"
+
+dependencies {
+    api libs.bundles.log4j
+    api libs.jackson.databind
+}

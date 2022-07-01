@@ -1,0 +1,26 @@
+subprojects {
+    apply plugin: "java-library"
+
+    group "com.github.rev1an"
+    version "0.0.1"
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    tasks.withType(Test).configureEach {
+        systemProperty "java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager"
+
+        reports {
+            html.required = false
+            junitXml.required = false
+        }
+
+        testLogging {
+            showStandardStreams = true
+            showExceptions = true
+            showStackTraces = true
+            showCauses = true
+        }
+    }
+}

@@ -1,0 +1,24 @@
+group "${group}.junit.api.restassured"
+description "JUnit API Tests with RestAssured"
+
+dependencies {
+    implementation projects.junitCore
+
+    implementation libs.bundles.rest.assured
+    implementation libs.allure.rest.assured
+}
+
+test {
+    useJUnitPlatform()
+
+    systemProperties = [
+            "junit.jupiter.execution.parallel.enabled"             : "true",
+            "junit.jupiter.execution.parallel.config.strategy"     : "custom",
+            "junit.jupiter.execution.parallel.config.custom.class" : "com.github.rev1an.core.junit.engine.DynamicParallelExecutionConfiguration",
+            "junit.jupiter.execution.parallel.mode.default"        : "concurrent",
+            "junit.jupiter.execution.parallel.mode.classes.default": "concurrent",
+            "junit.jupiter.testinstance.lifecycle.default"         : "per_class",
+            "junit.jupiter.testmethod.order.default"               : 'org.junit.jupiter.api.MethodOrderer$OrderAnnotation',
+            "junit.jupiter.extensions.autodetection.enabled"       : "true",
+    ]
+}

@@ -1,0 +1,11 @@
+group "${group}.junit.core"
+description "JUnit Extensions and Utilities"
+
+dependencies {
+    api projects.core
+    api libs.bundles.junit
+    api libs.assertj
+    api libs.allure.assertj
+    api libs.allure.junit.platform // with SPI
+    api libs.allure.junit5 // with SPI
+}

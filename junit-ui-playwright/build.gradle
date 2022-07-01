@@ -1,0 +1,21 @@
+group "${group}.junit.ui.playwright"
+description "JUnit UI Tests with Playwright Java"
+
+dependencies {
+    implementation projects.junitCore
+    implementation projects.corePlaywright
+}
+
+test {
+    useJUnitPlatform()
+
+    systemProperties = [
+            "java.util.logging.manager"                                : "org.apache.logging.log4j.jul.LogManager",
+            "junit.jupiter.extensions.autodetection.enabled"           : "true",
+            "junit.jupiter.execution.parallel.enabled"                 : "true",
+            "junit.jupiter.execution.parallel.config.strategy"         : "custom",
+            "junit.jupiter.execution.parallel.config.custom.class"     : "com.github.rev1an.core.junit.engine.FixedParallelExecutionConfigurationStrategy",
+            "junit.jupiter.execution.parallel.config.fixed.parallelism": "2",
+    ]
+
+}

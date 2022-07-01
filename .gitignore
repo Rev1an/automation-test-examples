@@ -1,0 +1,18 @@
+# Gradle
+.gradle
+gradle-app.setting
+
+# Better to not share :)
+.idea/
+*.iml
+build/
+out/
+gen/
+
+# .properties
+junit-platform.properties
+cucumber.properties
+
+# driver binaries
+chromedriver
+geckodriver

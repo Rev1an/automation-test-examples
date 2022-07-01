@@ -1,0 +1,42 @@
+[versions]
+log4j = "2.23.1"
+junit-jupiter = "5.11.0"
+selenium = "4.24.0"
+allure = "2.29.0"
+rest-assured = "5.3.0"
+
+[libraries]
+# Log4j
+log4j-core = { group = "org.apache.logging.log4j", name = "log4j-core", version.ref = "log4j" }
+log4j-jul = { group = "org.apache.logging.log4j", name = "log4j-jul", version.ref = "log4j" }
+log4j-slf4j = { group = "org.apache.logging.log4j", name = "log4j-slf4j-impl", version.ref = "log4j" }
+# JUnit 5
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit-jupiter" }
+# Selenium
+selenium-support = { group = "org.seleniumhq.selenium", name = "selenium-support", version.ref = "selenium" }
+selenium-chrome = { group = "org.seleniumhq.selenium", name = "selenium-chrome-driver", version.ref = "selenium" }
+selenium-firefox = { group = "org.seleniumhq.selenium", name = "selenium-firefox-driver", version.ref = "selenium" }
+selenium-safari = { group = "org.seleniumhq.selenium", name = "selenium-safari-driver", version.ref = "selenium" }
+# Playwright
+playwright = { group = "com.microsoft.playwright", name = "playwright", version = "1.46.0" }
+# Common
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version = "2.17.2" }
+assertj = { group = "org.assertj", name = "assertj-core", version = "3.26.3" }
+## Rest-Assured
+rest-assured = { group = "io.rest-assured", name = "rest-assured", version.ref = "rest-assured" }
+rest-assured-json-path = { group = "io.rest-assured", name = "json-path", version.ref = "rest-assured" }
+rest-assured-json-schema-validator = { group = "io.rest-assured", name = "json-schema-validator", version.ref = "rest-assured" }
+## Alure
+allure-assertj = { group = "io.qameta.allure", name = "allure-assertj", version.ref = "allure" }
+allure-junit-platform = { group = "io.qameta.allure", name = "allure-junit-platform", version.ref = "allure" }
+allure-junit5 = { group = "io.qameta.allure", name = "allure-junit5", version.ref = "allure" }
+allure-okhttp3 = { group = "io.qameta.allure", name = "allure-okhttp3", version.ref = "allure" }
+allure-rest-assured = { group = "io.qameta.allure", name = "allure-rest-assured", version.ref = "allure" }
+allure-cucumber7-jvm = { group = "io.qameta.allure", name = "allure-cucumber7-jvm", version.ref = "allure" }
+
+[bundles]
+log4j = ["log4j-core", "log4j-jul", "log4j-slf4j"]
+junit = ["junit-jupiter", "junit-params"]
+selenium = ["selenium-support", "selenium-chrome", "selenium-firefox", "selenium-safari"]
+rest-assured = ["rest-assured", "rest-assured-json-path", "rest-assured-json-schema-validator"]
