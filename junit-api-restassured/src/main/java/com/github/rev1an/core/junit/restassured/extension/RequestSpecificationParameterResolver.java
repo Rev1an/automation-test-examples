@@ -19,7 +19,7 @@ import org.junit.platform.commons.support.AnnotationSupport;
 import org.junit.platform.engine.ConfigurationParameters;
 
 /**
- * Allows to inject {@link RequestSpecification} as dependency into {@code constructor} or {@code test method}.
+ * Injects {@link RequestSpecification} as dependency into {@code constructor} or {@code test method}.
  */
 public class RequestSpecificationParameterResolver implements ParameterResolver {
 
@@ -38,31 +38,27 @@ public class RequestSpecificationParameterResolver implements ParameterResolver 
     @Override
     public RequestSpecification resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws
                                                                                                                        ParameterResolutionException {
-        return AnnotationSupport.findAnnotation(extensionContext.getTestMethod(), HttpConfig.class)
-                                .or(() -> AnnotationSupport.findAnnotation(extensionContext.getTestClass(), HttpConfig.class))
-                                .map(httpConfig -> {
-                                    var basePath = Optional.ofNullable(httpConfig.basePath())
-                                                           .orElse(extensionContext.getConfigurationParameter(Config.BASE_URI)
+        return findHttpConfigAnnotation(extensionContext)
+                       .map(httpConfig -> {
+                           var basePath = Optional.ofNullable(httpConfig.basePath())
+                                                  .orElseGet(() -> extensionContext.getConfigurationParameter(Config.BASE_URI)
                                                                                    .orElseThrow(() -> new RuntimeException("""
                                                                                                                            Required property [%s] not found!
-                                                                                                                           1. Provide base path using annotation %s on a) class or b) test level
-                                                                                                                           2. Create a %s file and set it there""".formatted(
+                                                                                                                           1. Provide base path using annotation '%s' on a) class or b) test level
+                                                                                                                           2. Create a '%s' file and set it there""".formatted(
                                                                                            Config.BASE_URI,
                                                                                            HttpConfig.class,
                                                                                            ConfigurationParameters.CONFIG_FILE_NAME))));
-
-                                    return RestAssured.given()
-                                                      .filter(this.allureRestAssured)
-                                                      .baseUri(basePath);
-                                })
-                                .orElse(RestAssured.given());
-
+                           return RestAssured.given()
+                                             .filter(this.allureRestAssured)
+                                             .baseUri(basePath);
+                       })
+                       .orElse(RestAssured.given());
     }
 
-    private HttpConfig findConfigAnnotation(ExtensionContext extensionContext) {
+    private Optional<HttpConfig> findHttpConfigAnnotation(ExtensionContext extensionContext) {
         return AnnotationSupport.findAnnotation(extensionContext.getTestMethod(), HttpConfig.class)
-                                .or(() -> AnnotationSupport.findAnnotation(extensionContext.getTestClass(), HttpConfig.class))
-                                .orElse(null);
+                                .or(() -> AnnotationSupport.findAnnotation(extensionContext.getTestClass(), HttpConfig.class));
     }
 
     public static final class Config {

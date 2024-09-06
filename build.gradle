@@ -1,5 +1,6 @@
 subprojects {
     apply plugin: "java-library"
+    apply from: "${rootDir}/allure.gradle.kts"
 
     group "com.github.rev1an"
     version "0.0.1"

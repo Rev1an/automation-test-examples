@@ -16,3 +16,5 @@ cucumber.properties
 # driver binaries
 chromedriver
 geckodriver
+
+allure-results/

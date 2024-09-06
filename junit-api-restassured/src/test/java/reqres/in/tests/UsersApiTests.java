@@ -42,7 +42,7 @@ public class UsersApiTests {
                               .body("id", Matchers.not(Matchers.emptyOrNullString()))
                               .body("createdAt", Matchers.not(Matchers.emptyOrNullString()))
                               .extract();
-        this.newId = response.jsonPath().get("$.id");
+        this.newId = response.jsonPath().get("id");
     }
 
     @Test
@@ -50,14 +50,15 @@ public class UsersApiTests {
     @DisabledIf(value = "postNotCreated",
                 disabledReason = "User must be created!")
     public void test_deleteUser(RequestSpecification request) {
-        request.delete("/api/users/" + this.newId)
+        request.delete("/api/users/{id}", this.newId)
                .then()
                .statusCode(204);
     }
 
     @Test
     public void test_listUsers(RequestSpecification request) {
-        request.get("/api/users?page=1")
+        request.queryParam("page", "1")
+               .get("/api/users")
                .then()
                .statusCode(200)
                .body("page", Matchers.is(1))

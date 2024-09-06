@@ -8,7 +8,7 @@ and [JUnit 5 Extensions](https://junit.org/junit5/docs/current/user-guide/#exten
 - Simply execute
 
 ```shell
-./gradlew :junit-api-restassured:test
+./gradlew test
 ```
 
 or use IDE of your choice.
